@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="icon" href="img/mastermind.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.5.0/balloon.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>    
+    <script src="js/jquery-3.4.0.min.js"></script>
+    <script src="js/script.js"></script>
+    <meta charset="UTF-8">
+    <title>Senha (MASTERMIND)</title>
+</head>
+<body onload="StartGame()"> 
+    <header>
+        <nav>
+            <div class="toggle">
+                <div class="bar">
+                    <i class="fas fa-bars"></i>
+                    <ul>
+                        <li onclick="DeleteOldGame()">Recomeçar</li>
+                        <li onclick="Modal('ajuda','modal_ajuda');">Ajuda</li>
+                    </ul>
+                </div>
+                <button data-balloon="Recomeçar o Jogo" data-balloon-pos="down" class="btn" id="r" onclick="DeleteOldGame()">Recomeçar</button>
+                <button data-balloon="Ajuda" data-balloon-pos="down" id="a" class="btn" onclick="Modal('ajuda','modal_ajuda');">Ajuda</button>
+            </div>
+            <button data-balloon="Recomeçar o Jogo" data-balloon-pos="down" class="btn" id="rec" onclick="DeleteOldGame()">Recomeçar</button>
+            <div class="selecao" id="selec-0">
+                <div class="botao cor-0 margin-btn-top" id="cor-0" onclick="CorEscolhida(0);" data-balloon="Clique para escolher Amarelo" data-balloon-pos="down"></div>
+            </div>
+            <div class="selecao" id="selec-1">
+                <div class="botao cor-1 margin-btn-top" id="cor-1" onclick="CorEscolhida(1);" data-balloon="Clique para escolher Azul" data-balloon-pos="down"></div>
+            </div>
+            <div class="selecao" id="selec-2">
+                    <div class="botao cor-2 margin-btn-top" id="cor-2" onclick="CorEscolhida(2);" data-balloon="Clique para escolher Laranja" data-balloon-pos="down"></div>
+            </div>
+            <div class="selecao" id="selec-3">
+                    <div class="botao cor-3 margin-btn-top" id="cor-3" onclick="CorEscolhida(3);" data-balloon="Clique para escolher Vermelho" data-balloon-pos="down"></div>
+            </div>
+            <div class="selecao" id="selec-4">
+                    <div class="botao cor-4 margin-btn-top" id="cor-4" onclick="CorEscolhida(4)" data-balloon="Clique para escolher Verde" data-balloon-pos="down"></div>
+            </div>
+            <div class="selecao" id="selec-5">
+                    <div class="botao cor-5 margin-btn-top" id="cor-5" onclick="CorEscolhida(5)" data-balloon="Clique para escolher Roxo" data-balloon-pos="down"></div>
+            </div>
+            <button data-balloon="Ajuda" data-balloon-pos="down" id="ajuda" class="btn" onclick="Modal('ajuda','modal_ajuda');"><i class="far fa-question-circle"></i></button>
+        </nav>
+    </header>
+    <button data-balloon="Conferir as cores para a próxima rodada" data-balloon-pos="left" id="conf" class="btn" onclick="Conferir()">Conferir!</button>
+	<div class="tab">
+        
+    <!-- Modal Ajuda -->
+    <div id="modal_ajuda" class="modal">
+
+        <!-- Modal content Ajuda -->
+        <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Ajuda</h2>
+        </div>
+        <div class="modal-body">
+            <h3>Sobre o Jogo</h3>
+            <p>Um jogo de Mastermind tem pinos de seis cores diferentes, aleatórias, exceto preto e branco. Os pinos pretos e brancos são menores. Há quatro buracos grandes em cada fileira, em 10 fileiras, uma abaixo da outra. E ao lado delas, um quadrado menor, com quatro buracos menores, dois em cima de dois. <br></p>
+            <p>O desafiador faz uma combinação com quatro pinos coloridos, escondendo a senha. Então, o desafiado tenta adivinhar a senha, pondo quatro pinos que ele acha que são a senha na primeira fileira, e o desafiador põe os pinos pretos e brancos no quadrado menor ao lado. <br> </p>
+            <p> A regra dos pinos pretos e brancos são essas: o branco significa que há uma cor certa mas lugar errado, o preto significa que há uma cor certa no lugar certo, e nenhum pino significa que uma das cores não é contida na senha. O desafiado vai tentando adivinhar, se guiando pelos pinos pretos e brancos. Se o desafiado não acertar até a 10ª fileira, o desafiador fecha o defletor e revela a senha, mas se adivinhar, o desafiador põe quatro pinos pretos e revela a senha.</p>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Jogo Ganho -->
+    <div id="modal_ganho" class="modal">
+        <!-- Modal content Jogo Ganho -->
+        <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Você Ganhou, Parabéns!</h2>
+        </div>
+        <div class="modal-body">
+            <h3>Dados do Jogo</h3>
+
+            <div class="rodadas" id="rod"></div>
+
+            <div class="tempo" id="temp"></div>
+
+        </div>
+        </div>
+    </div>
+
+    
+    <!-- Modal Jogo Perdido -->
+    <div id="modal_perdido" class="modal">
+        <!-- Modal content Jogo Perdido -->
+        <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Você Perdeu, tente novamente!</h2>
+        </div>
+        <div class="modal-body">
+            <button data-balloon="Recomeçar o Jogo" data-balloon-pos="down" class="btn" id="re" onclick="DeleteOldGame()">Recomeçar</button>
+            <div class="tempo" id="temp"></div>
+
+        </div>
+        </div>
+    </div>
+</body>
+</html>
