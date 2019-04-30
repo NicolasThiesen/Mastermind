@@ -44,7 +44,7 @@
             <div class="selecao" id="selec-5">
                     <div class="botao cor-5 margin-btn-top" id="cor-5" onclick="CorEscolhida(5)" data-balloon="Clique para escolher Roxo" data-balloon-pos="down"></div>
             </div>
-            <button data-balloon="Ajuda" data-balloon-pos="down" id="ajuda" class="btn" onclick="Modal('ajuda','modal_ajuda');"><i class="far fa-question-circle"></i></button>
+            <button data-balloon="Ajuda" data-balloon-pos="down" id="ajuda" class="btn" onclick="Modal(0,'modal_ajuda');"><i class="far fa-question-circle"></i></button>
         </nav>
     </header>
     <button data-balloon="Conferir as cores para a próxima rodada" data-balloon-pos="left" id="conf" class="btn" onclick="Conferir()">Conferir!</button>
@@ -69,7 +69,7 @@
     </div>
 
     <!-- Modal Jogo Ganho -->
-    <div id="modal_ganho" class="modal">
+    <div id="modal_ganhou" class="modal">
         <!-- Modal content Jogo Ganho -->
         <div class="modal-content">
         <div class="modal-header">
@@ -89,7 +89,7 @@
 
     
     <!-- Modal Jogo Perdido -->
-    <div id="modal_perdido" class="modal">
+    <div id="modal_perdeu" class="modal">
         <!-- Modal content Jogo Perdido -->
         <div class="modal-content">
         <div class="modal-header">

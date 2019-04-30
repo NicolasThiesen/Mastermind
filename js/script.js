@@ -26,6 +26,9 @@ function StartGame(){
 
 //Reseta as Variáveis
 function ResetVar(){
+  document.getElementById("selec-"+id_cor_old).className = "selecao"; 
+  id_cor=0;
+  cor=null;
   id_cor_old = "nada";
   cores_escolhidas = [];
   last_btn = 4;
@@ -152,14 +155,7 @@ function Conferir(){
   }
   //verifica se o jogador ganhou
   if (acertos==4){
-  var modal = document.getElementById("modal_ganho");
-    // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[1];
-
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-  modal.style.display = "block";
+  Modal(1,"modal_ganhou");
   var temp_end = new Date();
   var diferenca = temp_end.getTime() - temp_inicio.getTime();
   var segundos = Math.floor( ( diferenca % ( 60 * 1000 ) ) / 1000 );
@@ -180,14 +176,8 @@ function Conferir(){
 
   if (inserido==true){
     round +=1;
-    if(round==11){
-      var modal = document.getElementById("modal_perdido");
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[2];
-      modal.style.display = "block";
-      span.onclick = function() {
-        modal.style.display = "none";
-      }
+    if(round>10){
+      Modal(2,"modal_perdeu");
       return;
     }
     $(`<div class="row">
@@ -225,7 +215,7 @@ function Modal(id, id_modal){
 
 
   // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0]; 
+  var span = document.getElementsByClassName("close")[id]; 
   
   modal.style.display = "block";
   
